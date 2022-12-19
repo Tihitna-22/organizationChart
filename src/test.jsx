@@ -111,7 +111,7 @@ const StyledTreeExample = ({ title, treeItem }) => {
       label={<>
           <div class="flex items-center justify-center">
               <form action="">
-              <label class="text-blue border-blue hover:bg-blue flex h-40 w-40 cursor-pointer flex-col items-center justify-center rounded-full border bg-white uppercase tracking-wide shadow-lg hover:text-white">
+              <label class="text-blue border-blue hover:bg-blue flex h-40 w-40 cursor-pointer flex-col items-center justify-center rounded-full border bg-white uppercase tracking-wide shadow-lg ">
 
               <span class="mt-2 text-base leading-normal">{treeItem.label}</span>
               <input type="file" class="hidden" />
