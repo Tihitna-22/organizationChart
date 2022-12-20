@@ -1,78 +1,97 @@
-import React,  { useId }  from "react";
+import React,  { useEffect, useState, useMemo}  from "react";
 import "../App.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux"
-import { addUser } from "../redux/actions";
-import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
-
+import { addUser,loadUsers, getSingleUser, updateUser } from "../redux/actions";
+import { useNavigate, useParams } from "react-router-dom";
+import { v1 as uuidv1 } from 'uuid';                                                                                                                 
 const schema = yup.object().shape({
-  label: yup.string().required("First Name should be required please"),
-  description: yup.string().required(),
-  id: yup.string().required()
+  label: yup.string().required("should be required please"),
+  discription: yup.string().required(),
+  // id: yup.string().required()
   
 });
 
 
 function AddUser() {
-    let dispatch = useDispatch()
-    // const {users} = useSelector(state=>state.data)
+
+  const {user} = useSelector((state)=>state.data)
+    console.log(user)
+    // const [userEited, setuserEited] = useState("");
+
 
     const navigate = useNavigate()
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema),
-  });
 
-  const submitForm = (data) => {
-    // e.preventDefault
-    console.log(data);
-    data.id = {...register("id")}
-    dispatch(addUser(data))
-    // navigate("/")
+    let {id} = useParams()
+    console.log(id)
+    const privateId = uuidv1();
+
+
+    const { register, handleSubmit, errors , reset} = useForm({
+        resolver: yupResolver(schema),
+        
+      });
+
+    
+    let dispatch = useDispatch()
+    
+ 
+//  const {user} = useSelector((state)=>state.data)
+  const submitForm = (data,  e) => {
+    e.preventDefault()
+    console.log(id)
+    const d = {...data, "parentId": id, "id": privateId}
+    console.log(d);
+    // data.id = {...register("id")}
+    dispatch(addUser(d))
+    dispatch(loadUsers())
+    navigate("/")
   };
+
+
+
   return (
-    <div>
-      <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"onClick={()=>{
+    <>
+                  <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"onClick={()=>{
                 navigate("/")
              }} >
   Back
 </button>
-    <div className=" flex items-center  h-screen justify-center">
-      <div className="inputs relative">
-         <form onSubmit={handleSubmit(submitForm)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <input
-            type="text"
-            name="desclabelription"
-            {...register("label")}
-            placeholder="label..."
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-6"
-          />
-          
-          <input
-            type="text"
-            name="description"
-            placeholder="description"
-            {...register("description")} 
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6"
-          /> 
-          {/* <input
-            type="text"
-            name="id"
-            value={uuidv4()}
-            {...register("id")} 
-            className="d-none"
-          /> 
-          <p> {errors?.lastName?.message} </p>  */}
-       
-             <input type="submit" id="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" /> 
-             
-         </form> 
-      </div>
-    </div>
-    </div>
-    
+<div className="flex items-center  h-screen justify-center">
+
+<div className="Form">
+
+<div className="inputs">
+<button type="submit" onClick={()=>{
+       navigate("/")
+    }}>back</button>
+<form onSubmit={handleSubmit(submitForm)} className="bbg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+ <input
+   type="text"
+   name="label"
+   {...register("label")}
+   placeholder="label..."
+   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-6"
+ />
+
+ <input
+   type="text"
+   name="discription"
+   placeholder="discription"
+   {...register("discription" )} 
+   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-6"
+ />
+
+    <input type="submit" id="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"/> 
+</form> 
+</div>
+</div>
+</div>
+    </>
+   
+   
   );
 }
 

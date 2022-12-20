@@ -25,7 +25,7 @@ const userUpdate = () => ({
 
 export const loadUsers = () => {
     return function(dispatch) {
-            axios.get("https://639960f516b0fdad773af872.mockapi.io/tt").then((resp) => {
+            axios.get("https://639584e690ac47c6806cba72.mockapi.io/tt").then((resp) => {
                     console.log("resp", resp.data)
                     let data = resp.data
 
@@ -61,7 +61,7 @@ export const loadUsers = () => {
 
 export const deletUsers = (id) => {
     return function(dispatch) {
-        axios.delete(`https://639960f516b0fdad773af872.mockapi.io/tt/${id}`).then((resp) => {
+        axios.delete(`https://639584e690ac47c6806cba72.mockapi.io/tt/${id}`).then((resp) => {
             console.log("resp", resp)
             dispatch(userDeleted(id))
             dispatch(loadUsers())
@@ -76,7 +76,7 @@ export const deletUsers = (id) => {
 }
 export const addUser = (user) => {
     return function(dispatch) {
-        axios.post(`https://639960f516b0fdad773af872.mockapi.io/chrt`, user).then((resp) => {
+        axios.post(`https://639584e690ac47c6806cba72.mockapi.io/tt`, user).then((resp) => {
                 console.log("resp", resp)
                 dispatch(userAdded())
                 dispatch(loadUsers())
@@ -90,7 +90,7 @@ export const addUser = (user) => {
 
 export const getSingleUser = (id) => {
     return function(dispatch) {
-        axios.get(`https://639960f516b0fdad773af872.mockapi.io/tt/${id}`).then((resp) => {
+        axios.get(`https://639584e690ac47c6806cba72.mockapi.io/tt/${id}`).then((resp) => {
             console.log("resp", resp.data)
             dispatch(getUser(resp.data))
                 // dispatch(loadUsers())
@@ -106,7 +106,7 @@ export const getSingleUser = (id) => {
 
 export const updateUser = (user, id) => {
     return function(dispatch) {
-        axios.put(`https://639960f516b0fdad773af872.mockapi.io/tt/${id}`, user).then((resp) => {
+        axios.put(`https://639584e690ac47c6806cba72.mockapi.io/tt/${id}`, user).then((resp) => {
             console.log("resp", resp.data)
             dispatch(userUpdate())
             dispatch(loadUsers())
