@@ -23,14 +23,14 @@ function LastChild(props) {
     console.log(id)
   }
   return ( 
-      <div class="flex items-center justify-center">
+      <div className="flex items-center justify-center">
 
-        <div class="max-w-md py-4 px-6 bg-white shadow-lg rounded-lg my-3">
-          <div class="flex items-center justify-center">
+        <div className="max-w-md py-4 px-6 bg-white shadow-lg rounded-lg my-3">
+          <div className="flex items-center justify-center  border-b ">
             <div >
-              <h2 class="text-gray-800 font-semibold text-xl font-medium text-indigo-500">{props.item.label}</h2>
+              <h2 className="text-gray-800 font-semibold text-xl font-medium text-indigo-500">{props.item.label}</h2>
             </div>
-            <div className='justify-self-end'>
+            <div className='justify-self-end pl-6'>
               <Menu offset={10} arrowPosition="center" transition="rotate-right" position="right-start">
               <Menu.Target>
 
@@ -72,9 +72,9 @@ function LastChild(props) {
           { props.item.children && 
 
             ( <div className="flex justify-center ">
-                <button onClick={() => setCollaps((o) => !o)} class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+                <button onClick={() => setCollaps((o) => !o)} className="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
                 <svg class="h-5 w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#EAB308">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
                 </button>
             </div>)}

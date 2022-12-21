@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import Tree from "../test";
+import StyledTreeExample from "../test";
 import { useDispatch, useSelector } from 'react-redux'
 import { loadEmployers } from '../redux/actions';
 
@@ -9,7 +9,7 @@ import { loadEmployers } from '../redux/actions';
 function Home() {
   const {employers} = useSelector(state=>state.data)
   const dispach = useDispatch()
-  //  console.log(users)
+   console.log(employers)
   useEffect(()=>{
   dispach(loadEmployers)
 
@@ -18,11 +18,13 @@ function Home() {
 
 return (
 <div className='App'>
-  <div>Organization Hirarchy</div>
+
+<h3 class="font-medium leading-tight text-3xl mt-0 mb-2 text-indigo-500">Organization Hirarchy</h3>
+
   {
   employers?.map((employer)=>{
   return (
-    <Tree title="Locations" treeItem={employer}/>
+    <StyledTreeExample  treeItem={employer} key={employer.id}/>
   )
 
   })

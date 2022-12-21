@@ -48,16 +48,17 @@ const AddNode = ({parentId}) =>{
 
 
 const RenderInnerTree = (props) => {
-  const [collapse, setCollaps] = useState(false);
+  const [collapse, setCollaps] = useState(true);
   
 
 
   return (
     <>
-    {collapse ? <TreeNode label={<LastChild  item={props.item} collapse={collapse} setCollaps={setCollaps}/> } /> 
+    {collapse ? <TreeNode  key={props.item.id} label={<LastChild  item={props.item} collapse={collapse} setCollaps={setCollaps}/> } /> 
     :
   (
     <TreeNode
+    key={props.item.id}
     label={
   <LastChild item={props.item}  setCollaps={setCollaps} collapse={collapse}/>
     }
@@ -65,7 +66,7 @@ const RenderInnerTree = (props) => {
       {!collapse && props.item.children && props.item.children?.map((ch)=>
       <>
       {
-        ch.children ? <RenderInnerTree  item={ch} /> : <TreeNode label={<LastChild  item={ch} collapse={collapse}/>
+        ch.children ? <RenderInnerTree  item={ch} key={ch.id}/> : <TreeNode label={<LastChild  item={ch} collapse={collapse} />
         } />
       }</>    
       )}
@@ -75,26 +76,27 @@ const RenderInnerTree = (props) => {
   );
 };
 
-const StyledTreeExample = ({ title, treeItem }) => {
+const StyledTreeExample = ({treeItem }) => {
   return(
-  <Container>
+  <Container key={treeItem}>
     <Tree
       lineWidth={"2px"}
       lineColor={"#EAB308"}
       lineBorderRadius={"10px"}
+      lineHeight="30px"
       label={<>
-          <div class="flex items-center justify-center">
+          <div className="flex items-center justify-center">
               <form action="">
-              <label class="text-blue border-blue hover:bg-blue flex h-40 w-40 cursor-pointer flex-col items-center justify-center rounded-full border bg-white uppercase tracking-wide shadow-lg ">
+              <label className="text-blue border-blue hover:bg-blue flex h-40 w-40 cursor-pointer flex-col items-center justify-center rounded-full border bg-white uppercase tracking-wide shadow-lg ">
 
-              <span class="mt-2 text-base leading-normal">{treeItem.label}</span>
-              <input type="file" class="hidden" />
+              <span className="text-gray-800 font-semibold text-xl font-medium text-indigo-500">{treeItem.label}</span>
+              <span className="mt-2 text-gray-600 ">{treeItem.discription}</span>
               </label>
               </form>
           </div>
       </>}
     >
-      {treeItem.children ? treeItem.children.map((item)=><RenderInnerTree item={item}/> ): "<></>" }
+      {treeItem.children ? treeItem.children.map((item)=><RenderInnerTree item={item} key={item.id}/> ): "<></>" }
     </Tree>
   </Container>
 );
