@@ -1,35 +1,35 @@
 import * as types from './actionType'
 
 const initialState = {
-    users: [],
-    user: {},
+    employers: [],
+    employer: {},
     loading: true,
     isOpend: false
 }
 const usersReducers = (state = initialState, action) => {
     switch (action.type) {
-        case types.GET_USERS:
+        case types.GET_EMPLOYERS:
             return {
                 ...state,
-                users: action.payload,
+                employers: action.payload,
                 loading: false
             };
-        case types.DELETE_USERS:
+        case types.DELETE_EMPLOYERS:
             return {
                 ...state,
                 loading: false
             };
-        case types.ADD_USERS:
-        case types.UPDATE_USERS:
+        case types.ADD_EMPLOYERS:
+        case types.UPDATE_EMPLOYERS:
 
             return {
                 ...state,
                 loading: false
             };
-        case types.GET_SINGLE_USERS:
+        case types.GET_SINGLE_EMPLOYER:
             return {
                 ...state,
-                user: action.payload,
+                employer: action.payload,
                 loading: false
             };
 

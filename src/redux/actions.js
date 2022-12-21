@@ -2,28 +2,28 @@ import * as types from './actionType'
 import axios from "axios"
 // import { Result } from 'postcss'
 
-const getUsers = (users) => ({
-    type: types.GET_USERS,
-    payload: users,
+const getUsers = (employers) => ({
+    type: types.GET_EMPLOYERS,
+    payload: employers,
 
 })
-const userDeleted = () => ({
-    type: types.DELETE_USERS,
+const employerDeleted = () => ({
+    type: types.DELETE_EMPLOYERS,
 })
-const userAdded = () => ({
-    type: types.ADD_USERS,
+const employerAdded = () => ({
+    type: types.ADD_EMPLOYERS,
 })
-const getUser = (user) => ({
-    type: types.GET_SINGLE_USERS,
-    payload: user
+const getEmployer = (employer) => ({
+    type: types.GET_SINGLE_EMPLOYER,
+    payload: employer
 })
-const userUpdate = () => ({
-    type: types.UPDATE_USERS,
+const employerUpdate = () => ({
+    type: types.UPDATE_EMPLOYERS,
     // payload: user
 })
 
 
-export const loadUsers = () => {
+export const loadEmployers = () => {
     return function(dispatch) {
             axios.get("https://639584e690ac47c6806cba72.mockapi.io/tt").then((resp) => {
                     console.log("resp", resp.data)
@@ -59,12 +59,12 @@ export const loadUsers = () => {
 }
 
 
-export const deletUsers = (id) => {
+export const deletEmployer = (id) => {
     return function(dispatch) {
         axios.delete(`https://639584e690ac47c6806cba72.mockapi.io/tt/${id}`).then((resp) => {
             console.log("resp", resp)
-            dispatch(userDeleted(id))
-            dispatch(loadUsers())
+            dispatch(employerDeleted(id))
+            dispatch(loadEmployers())
                 // return resp.data
         })
 
@@ -74,12 +74,12 @@ export const deletUsers = (id) => {
 
     }
 }
-export const addUser = (user) => {
+export const addEmployer = (employer) => {
     return function(dispatch) {
-        axios.post(`https://639584e690ac47c6806cba72.mockapi.io/tt`, user).then((resp) => {
+        axios.post(`https://639584e690ac47c6806cba72.mockapi.io/tt`, employer).then((resp) => {
                 console.log("resp", resp)
-                dispatch(userAdded())
-                dispatch(loadUsers())
+                dispatch(employerAdded())
+                dispatch(loadEmployers())
             })
             .catch((error) => {
                 console.log(error)
@@ -88,11 +88,11 @@ export const addUser = (user) => {
     }
 }
 
-export const getSingleUser = (id) => {
+export const getSingleEmployer = (id) => {
     return function(dispatch) {
         axios.get(`https://639584e690ac47c6806cba72.mockapi.io/tt/${id}`).then((resp) => {
             console.log("resp", resp.data)
-            dispatch(getUser(resp.data))
+            dispatch(getEmployer(resp.data))
                 // dispatch(loadUsers())
                 // return resp.data
         })
@@ -104,12 +104,12 @@ export const getSingleUser = (id) => {
     }
 }
 
-export const updateUser = (user, id) => {
+export const updateEmployer = (employer, id) => {
     return function(dispatch) {
-        axios.put(`https://639584e690ac47c6806cba72.mockapi.io/tt/${id}`, user).then((resp) => {
+        axios.put(`https://639584e690ac47c6806cba72.mockapi.io/tt/${id}`, employer).then((resp) => {
             console.log("resp", resp.data)
-            dispatch(userUpdate())
-            dispatch(loadUsers())
+            dispatch(employerUpdate())
+            dispatch(loademployers())
                 // return resp.data
         })
 
