@@ -1,6 +1,6 @@
 # Organization-Chart
 
-[![Capture.jpg](https://i.ibb.co/bR2Lwy9/Capture.jpg)]
+[![Screenshot-4.png)](https://i.ibb.co/CMM1K1G/Screenshot-4.png)]
 
 ## Table of content
 
@@ -13,7 +13,7 @@
 
 Organization-chart is a web application for registering organization's employee hierarchy in the form of parent child relation where the CEO is the root for the chart. From this SPA we can select, edit and delete a single employee
 
-## Technologies
+## Technology
 
 - React.js
 
