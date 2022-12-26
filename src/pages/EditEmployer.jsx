@@ -6,10 +6,11 @@ import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux"
 import { loadEmployers, getSingleEmployer, updateEmployer} from "../redux/actions";
 import { useNavigate, useParams } from "react-router-dom";
+// import { ErrorMessage } from '@hookform/erro';
 
 
 const schema = yup.object().shape({
-  name: yup.string().required("First Name should be required please"),
+  name: yup.string().required("Name is required"),
   description: yup.string().required(),
   // id: yup.string().required()
   
@@ -21,7 +22,7 @@ function EditEmployer() {
       const {employer} = useSelector((state)=>state.data)
       const navigate = useNavigate()
       let {id} = useParams()
-      const { register, handleSubmit, errors , reset} = useForm({
+      const { register, handleSubmit, formState: { errors } , reset} = useForm({
       resolver: yupResolver(schema),
       defaultValues: {
       name: employer.name,
@@ -66,7 +67,7 @@ function EditEmployer() {
             placeholder="name..."
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-6"
             />
-
+          {errors.name && <p className=" font-medium  text-red-500 text-xs mt-1 ml-1">{errors.name.message}</p>}
             <input
             type="text"
             name="description"
@@ -74,7 +75,7 @@ function EditEmployer() {
             {...register("description" )} 
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-6"
             />
-
+           {errors.description && <p className=" font-medium  text-red-500 text-xs mt-1 mb-3 ml-1">{errors.description.message}</p>}
             <input type="submit" id="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"/> 
             <button class="mx-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"onClick={()=>{
         navigate("/")

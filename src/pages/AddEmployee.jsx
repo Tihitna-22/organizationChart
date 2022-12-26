@@ -9,8 +9,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { v1 as uuidv1 } from 'uuid';       
                                                                                                          
 const schema = yup.object().shape({
-  name: yup.string().required("should be required please"),
-  description: yup.string().required(),
+  name:yup.string().required("First Name should be required please"),
+  description: yup.string().required()
  
 });
 
@@ -21,12 +21,12 @@ function AddEmployee() {
       const navigate = useNavigate()
 
       let {id} = useParams()
-      console.log(id)
+      // console.log(id)
       const privateId = uuidv1();
 
 
-      const { register, handleSubmit, errors , reset} = useForm({
-      resolver: yupResolver(schema),
+      const { register, handleSubmit, formState: { errors } , reset} = useForm({
+      resolver: yupResolver(schema)
 
       });
 
@@ -36,6 +36,7 @@ function AddEmployee() {
       // console.log(id)
       const d = {...data, "parentId": id, "id": privateId}
       dispatch(addEmployer(d))
+      
       dispatch(loadEmployers())
       navigate("/")
       };
@@ -55,7 +56,8 @@ function AddEmployee() {
           placeholder="name..."
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-6"
           />
-        
+       
+       {errors.name && <p className=" font-medium  text-red-500 text-xs mt-1 ml-1">{errors.name.message}</p>}
           <input
           type="text"
           name="description"
@@ -63,7 +65,7 @@ function AddEmployee() {
           {...register("description" )} 
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-6"
           />
-
+          {errors.description && <p className=" font-medium  text-red-500 text-xs mt-1 mb-3 ml-1">{errors.description.message}</p>}
           <input type="submit" id="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"/> 
           <button class="mx-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"onClick={()=>{
         navigate("/")
