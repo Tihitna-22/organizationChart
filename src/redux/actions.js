@@ -109,7 +109,7 @@ export const updateEmployer = (employer, id) => {
         axios.put(`https://639584e690ac47c6806cba72.mockapi.io/tt/${id}`, employer).then((resp) => {
             console.log("resp", resp.data)
             dispatch(employerUpdate())
-            dispatch(loademployers())
+            dispatch(loadEmployers())
                 // return resp.data
         })
 

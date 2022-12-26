@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react'
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home'
-import AddUser from './pages/add';
+import AddUser from './pages/AddEmployee';
 import { useDispatch, useSelector } from 'react-redux'
 import { loadEmployers } from './redux/actions'
-import EditUser from './pages/edit';
+import EditUser from './pages/EditEmployer';
 
 
 

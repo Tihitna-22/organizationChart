@@ -1,5 +1,5 @@
 import React from 'react'
-import {deletEmployer, loadEmployers} from "../redux/actions"
+import { loadEmployers, deletEmployer} from "../redux/actions"
 import { useDispatch, useSelector } from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 
@@ -9,26 +9,26 @@ import { Edit,Trash } from 'tabler-icons-react';
 
 
 
-function LastChild(props) {
+function ChildComponent(props) {
   const setCollaps =  props.setCollaps
   let dispatch = useDispatch()
 
   const navigate = useNavigate();
-  console.log(props.item.id)
+  // console.log(props.item.id)
  const handleDelet=(id)=>{
     if(window.confirm("want to delete")){
       dispatch(deletEmployer(id))
       dispatch(loadEmployers())
     }
-    console.log(id)
+    // console.log(id)
   }
   return ( 
       <div className="flex items-center justify-center">
 
-        <div className="max-w-md py-4 px-6 bg-white shadow-lg rounded-lg my-3">
+        <div className="max-w-md py-2 px-2 bg-white shadow-lg rounded-lg ">
           <div className="flex items-center justify-center  border-b ">
             <div >
-              <h2 className="text-gray-800 font-semibold text-xl font-medium text-indigo-500">{props.item.label}</h2>
+              <h2 className="text-gray-800 font-semibold text-xl font-medium text-indigo-500">{props.item.name}</h2>
             </div>
             <div className='justify-self-end pl-6'>
               <Menu offset={10} arrowPosition="center" transition="rotate-right" position="right-start">
@@ -58,16 +58,12 @@ function LastChild(props) {
               }>
                 Delete
               </Menu.Item>
-
-
-
-
               </Menu.Dropdown>
               </Menu>
             </div>
           </div>
             <div>
-               <p class="mt-2 text-gray-600 ">{props.item.discription}</p>
+               <p class="mt-2 text-gray-600 ">{props.item.description}</p>
             </div>
           { props.item.children && 
 
@@ -83,4 +79,4 @@ function LastChild(props) {
   )
 }
 
-export default LastChild
+export default ChildComponent
